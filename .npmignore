@@ -1,0 +1,15 @@
+guides/
+src/
+assets/
+benchmarks/
+node_modules/
+test/
+assets/*.psd
+**/vault.json
+tsconfig.json
+
+buildscript.js
+index.ts
+index.mts
+!index.d.ts
+!index.d.mts

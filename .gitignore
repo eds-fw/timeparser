@@ -1,0 +1,10 @@
+node_modules/
+dist/
+assets/
+test/
+assets/*.psd
+**/vault.json
+
+index.*
+!index.ts
+!index.mts
