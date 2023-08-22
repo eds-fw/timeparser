@@ -1,6 +1,6 @@
 {
   "name": "@easy-ds-bot/timeparser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simply string time converter (en/ru). From \"5d2h\" to 439200000 ms",
   "main": "index",
   "scripts": {
@@ -37,9 +37,9 @@
   },
   "typesVersions": {
     ">=4.2": {
-       "*": [
-         "dist/types/*"
-       ]
+      "*": [
+        "dist/types/*"
+      ]
     }
   },
   "types": "./index.d.ts"
