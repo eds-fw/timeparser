@@ -1,7 +1,7 @@
 {
   "name": "@easy-ds-bot/timeparser",
   "version": "1.0.0",
-  "description": "Simply string time converter (en/ru)",
+  "description": "Simply string time converter (en/ru). From \"5d2h\" to 439200000 ms",
   "main": "index",
   "scripts": {
     "build": "npx tsc -p tsconfig.cjs.json && npx tsc -p tsconfig.esm.json && npx tsc -p tsconfig.types.json"
@@ -14,7 +14,8 @@
     "typescript",
     "time",
     "parsetime",
-    "timeparser"
+    "timeparser",
+    "nodejs"
   ],
   "author": "dtkdtk0",
   "license": "MIT",
@@ -27,11 +28,11 @@
     "typescript": "^5.1.6"
   },
   "exports": {
-    "./*": {
-      "types": "./dist/types/*.d.ts",
-      "require": "./dist/cjs/*.js",
-      "import": "./dist/esm/*.js",
-      "default": "./dist/esm/*.js"
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
     }
   },
   "typesVersions": {

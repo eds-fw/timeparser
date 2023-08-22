@@ -34,7 +34,6 @@ export const limits_map = {
      2_592_000_000:             379_200,
     22_118_400_000:              31_600,
 };
-
 const time_RegExp_entries = Object.entries(time_RegExp);
 
 /**
@@ -44,7 +43,7 @@ const time_RegExp_entries = Object.entries(time_RegExp);
  * 
  * Returns `null` if `time > 31600 years`
  */
-export function timeParse(time: string): ParsedTime | null
+export function timeParser(time: string): ParsedTime | null
 {
     let result = 0;
     let result_matches: string[] = [];
@@ -79,3 +78,5 @@ export function timeParse(time: string): ParsedTime | null
         get years()     { return result / 22_118_400_000 },
     };
 }
+
+export default timeParser;
