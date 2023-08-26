@@ -1,20 +1,21 @@
 export interface ParsedTime
 {
-    ms:         number;
-    seconds:    number;
-    minutes:    number;
-    hours:      number;
-    days:       number;
-    weeks:      number;
-    months:     number;
-    years:      number;
+    get ms():           number;
+    get seconds():      number;
+    get minutes():      number;
+    get hours():        number;
+    get days():         number;
+    get weeks():        number;
+    get months():       number;
+    get years():        number;
 
-    _matches:   string[];
+    _matches:           string[];
+    get _deparsed():    string;
 }
 
 /** 316 centuries or 31600 years */
-export const limit_ms = 999_999_999_999_999;
-export const time_RegExp = {
+export const limitms = 999_999_999_999_999;
+export const timeRegExp = {
                  1: /([0-9])+(ms|msec(|s)|milli|millisecond(|s)|мс|мсек|миллисекунд(|а|ы))/gi,
              1_000: /([0-9])+(s|sec(|s)|second(|s)|с|сек|секунд(|а|ы))/gi,
             60_000: /([0-9])+(m|min(|s)|minute(|s)|м|мин|минут(|а|ы))/gi,
@@ -24,17 +25,38 @@ export const time_RegExp = {
      2_592_000_000: /([0-9])+(mth(|s)|mnth(|s)|month(|s)|мес|месяц(|ы|ев))/gi,
     22_118_400_000: /([0-9])+(y|yr(|s)|year(|s)|г|гд|год(|ы|ов)|лет)/gi,
 };
-export const limits_map = {
-                 1: 997_198_860_799_837,
-             1_000:     997_198_860_800,
-            60_000:      16_619_981_013,
-         3_600_000:         276_999_684,
-        86_400_000:          11_534_000,
-       604_800_000:           1_647_714,
-     2_592_000_000:             379_200,
-    22_118_400_000:              31_600,
+export const timeRegExpNames = {
+    "ms":           /([0-9])+(ms|msec(|s)|milli|millisecond(|s)|мс|мсек|миллисекунд(|а|ы))/gi,
+    "s":            /([0-9])+(s|sec(|s)|second(|s)|с|сек|секунд(|а|ы))/gi,
+    "m":            /([0-9])+(m|min(|s)|minute(|s)|м|мин|минут(|а|ы))/gi,
+    "h":            /([0-9])+(h|hr(|s)|hour(|s)|ч|чс|час(|а|ов))/gi,
+    "d":            /([0-9])+(d|day(|s)|д|день|дн(|и|ей))/gi,
+    "w":            /([0-9])+(w|wk(|s)|week(|s)|н|нд|нед|недел(ь|и|ей))/gi,
+    "mon":          /([0-9])+(mon|mth(|s)|mnth(|s)|month(|s)|мес|месяц(|ы|ев))/gi,
+    "y":            /([0-9])+(y|yr(|s)|year(|s)|г|гд|год(|ы|ов)|лет)/gi,
 };
-const time_RegExp_entries = Object.entries(time_RegExp);
+export const timeNamesMap = {
+                 1: "ms",
+             1_000: "s",
+            60_000: "m",
+         3_600_000: "h",
+        86_400_000: "d",
+       604_800_000: "w",
+     2_592_000_000: "mon",
+    22_118_400_000: "y",
+};
+//Ziggurat!!!
+export const limitsMap = {
+                 1:  Math.floor(limitms / 1),
+             1_000:  Math.floor(limitms / 1_000),
+            60_000:  Math.floor(limitms / 60_000),
+         3_600_000:  Math.floor(limitms / 3_600_000),
+        86_400_000:  Math.floor(limitms / 86_400_000),
+       604_800_000:  Math.floor(limitms / 604_800_000),
+     2_592_000_000:  Math.floor(limitms / 2_592_000_000),
+    22_118_400_000:  Math.floor(limitms / 22_118_400_000),
+};
+const entriesRegExp = Object.entries(timeRegExp);
 
 /**
  * Converts string time (e.g. `1d3h`) into milliseconds (`97_200_000`)
@@ -43,12 +65,12 @@ const time_RegExp_entries = Object.entries(time_RegExp);
  * 
  * Returns `null` if `time > 31600 years`
  */
-export function timeParser(time: string): ParsedTime | null
+export function parseTime(time: string): ParsedTime | null
 {
     let result = 0;
     let result_matches: string[] = [];
 
-    for (const [ms, rx] of time_RegExp_entries)
+    for (const [ms, rx] of entriesRegExp)
     {
         let matches = time.match(rx);
         if (matches === null) continue;
@@ -59,24 +81,47 @@ export function timeParser(time: string): ParsedTime | null
         result_matches = result_matches.concat(...(matches as string[]));
 
         let matches_nums = matches.map($ => Number($.match(/([0-9])/g)?.join('') ?? 0)).reduce((a, b) => a + b);
-        if (matches_nums > limits_map[Number(ms) as keyof typeof time_RegExp])
+        if (matches_nums > limitsMap[Number(ms) as keyof typeof limitsMap])
         return null;
 
         result += matches_nums * Number(ms);
     }
 
     return {
-        _matches:       result_matches,
-        ms:             result,
+        get _deparsed()     { return deparseTime(result) },
+        _matches:           result_matches,
 
-        get seconds()   { return result /          1_000 },
-        get minutes()   { return result /         60_000 },
-        get hours()     { return result /      3_600_000 },
-        get days()      { return result /     86_400_000 },
-        get weeks()     { return result /    604_800_000 },
-        get months()    { return result /  2_592_000_000 },
-        get years()     { return result / 22_118_400_000 },
+        ms:                 result,
+        get seconds()       { return result /          1_000 },
+        get minutes()       { return result /         60_000 },
+        get hours()         { return result /      3_600_000 },
+        get days()          { return result /     86_400_000 },
+        get weeks()         { return result /    604_800_000 },
+        get months()        { return result /  2_592_000_000 },
+        get years()         { return result / 22_118_400_000 },
     };
 }
 
+/**
+ * Converts milliseconds into string time
+ * 
+ * One month = 30 days, one year = 365 days
+ */
+export function deparseTime(ms: number, separator: string = ''): string
+{
+    let result: string[] = [];
+    for (let remainder = ms; remainder > 0;)
+        for (const [time, name] of Object.entries(timeNamesMap).reverse())
+        {
+            const count = Math.floor(remainder / Number(time));
+            if (count)
+            {
+                remainder -= count * Number(time);
+                result.push(`${count}${name}`);
+            }
+        }
+    return result.join(separator);
+}
+
+export const timeParser = parseTime;
 export default timeParser;

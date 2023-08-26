@@ -1,26 +1,32 @@
-const { timeParse } = require("../dist/cjs/index");
+const { parseTime } = require("../dist/cjs/index");
 const Benchmark = require("benchmark");
 const suite = new Benchmark.Suite;
 let test;
 
 suite
-.add('(cjs) timeParser("1s")', function() {
-    test = timeParser("1s");
+.add('(cjs) parseTime("1s")', function() {
+    test = parseTime("1s");
 })
-.add('(cjs) timeParser("1s").ms', function() {
-    test = timeParser("1s").ms;
+.add('(cjs) parseTime("1s").ms', function() {
+    test = parseTime("1s").ms;
 })
-.add('(cjs) timeParser("1s").years', function() {
-    test = timeParser("1s").years;
+.add('(cjs) parseTime("1s").years', function() {
+    test = parseTime("1s").years;
 })
-.add('(cjs) timeParser("1y2mth3w4d5h6s7ms")', function() {
-    test = timeParser("1y2mth3w4d5h6s7ms");
+.add('(cjs) parseTime("1s")._deparsed', function() {
+    test = parseTime("1s")._deparsed;
 })
-.add('(cjs) timeParser("1y2mth3w4d5h6s7ms").ms', function() {
-    test = timeParser("1y2mth3w4d5h6s7ms").ms;
+.add('(cjs) parseTime("1y2mth3w4d5h6s7ms")', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms");
 })
-.add('(cjs) timeParser("1y2mth3w4d5h6s7ms").years', function() {
-    test = timeParser("1y2mth3w4d5h6s7ms").years;
+.add('(cjs) parseTime("1y2mth3w4d5h6s7ms").ms', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms").ms;
+})
+.add('(cjs) parseTime("1y2mth3w4d5h6s7ms").years', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms").years;
+})
+.add('(cjs) parseTime("1y2mth3w4d5h6s7ms")._deparsed', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms")._deparsed;
 })
 
 
@@ -34,10 +40,12 @@ suite
 .run({ 'async': true });
 
 /* RESULT:
-(cjs) timeParser("1s") x 371,492 ops/sec ±0.97% (88 runs sampled)
-(cjs) timeParser("1s").ms x 369,225 ops/sec ±0.86% (92 runs sampled)
-(cjs) timeParser("1s").years x 372,001 ops/sec ±0.61% (95 runs sampled)
-(cjs) timeParser("1y2mth3w4d5h6s7ms") x 116,745 ops/sec ±1.86% (89 runs sampled)
-(cjs) timeParser("1y2mth3w4d5h6s7ms").ms x 102,950 ops/sec ±5.63% (79 runs sampled)
-(cjs) timeParser("1y2mth3w4d5h6s7ms").years x 109,983 ops/sec ±2.64% (86 runs sampled)
+(cjs) parseTime("1s") x 311,011 ops/sec ±3.58% (79 runs sampled)
+(cjs) parseTime("1s").ms x 302,129 ops/sec ±1.53% (83 runs sampled)
+(cjs) parseTime("1s").years x 322,713 ops/sec ±1.16% (88 runs sampled)
+(cjs) parseTime("1s")._deparsed x 177,589 ops/sec ±1.03% (80 runs sampled)
+(cjs) parseTime("1y2mth3w4d5h6s7ms") x 112,658 ops/sec ±0.88% (93 runs sampled)
+(cjs) parseTime("1y2mth3w4d5h6s7ms").ms x 113,132 ops/sec ±0.44% (94 runs sampled)
+(cjs) parseTime("1y2mth3w4d5h6s7ms").years x 110,092 ops/sec ±0.65% (91 runs sampled)
+(cjs) parseTime("1y2mth3w4d5h6s7ms")._deparsed x 84,229 ops/sec ±0.53% (95 runs sampled)
 */

@@ -1,26 +1,32 @@
-import { timeParser } from "../../dist/esm/index.js";
+import { parseTime } from "../../dist/esm/index.js";
 import Benchmark from "benchmark";
 const suite = new Benchmark.Suite;
 let test;
 
 suite
-.add('(esm) timeParser("1s")', function() {
-    test = timeParser("1s");
+.add('(esm) parseTime("1s")', function() {
+    test = parseTime("1s");
 })
-.add('(esm) timeParser("1s").ms', function() {
-    test = timeParser("1s").ms;
+.add('(esm) parseTime("1s").ms', function() {
+    test = parseTime("1s").ms;
 })
-.add('(esm) timeParser("1s").years', function() {
-    test = timeParser("1s").years;
+.add('(esm) parseTime("1s").years', function() {
+    test = parseTime("1s").years;
 })
-.add('(esm) timeParser("1y2mth3w4d5h6s7ms")', function() {
-    test = timeParser("1y2mth3w4d5h6s7ms");
+.add('(esm) parseTime("1s")._deparsed', function() {
+    test = parseTime("1s")._deparsed;
 })
-.add('(esm) timeParser("1y2mth3w4d5h6s7ms").ms', function() {
-    test = timeParser("1y2mth3w4d5h6s7ms").ms;
+.add('(esm) parseTime("1y2mth3w4d5h6s7ms")', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms");
 })
-.add('(esm) timeParser("1y2mth3w4d5h6s7ms").years', function() {
-    test = timeParser("1y2mth3w4d5h6s7ms").years;
+.add('(esm) parseTime("1y2mth3w4d5h6s7ms").ms', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms").ms;
+})
+.add('(esm) parseTime("1y2mth3w4d5h6s7ms").years', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms").years;
+})
+.add('(esm) parseTime("1y2mth3w4d5h6s7ms")._deparsed', function() {
+    test = parseTime("1y2mth3w4d5h6s7ms")._deparsed;
 })
 
 
@@ -34,10 +40,12 @@ suite
 .run({ 'async': true });
 
 /* RESULT:
-(esm) timeParser("1s") x 370,134 ops/sec ±1.45% (91 runs sampled)
-(esm) timeParser("1s").ms x 377,191 ops/sec ±0.60% (94 runs sampled)
-(esm) timeParser("1s").years x 372,549 ops/sec ±0.58% (94 runs sampled)
-(esm) timeParser("1y2mth3w4d5h6s7ms") x 122,565 ops/sec ±0.22% (95 runs sampled)
-(esm) timeParser("1y2mth3w4d5h6s7ms").ms x 123,687 ops/sec ±0.53% (97 runs sampled)
-(esm) timeParser("1y2mth3w4d5h6s7ms").years x 114,201 ops/sec ±1.89% (87 runs sampled)
+(esm) parseTime("1s") x 297,430 ops/sec ±3.12% (79 runs sampled)
+(esm) parseTime("1s").ms x 319,093 ops/sec ±0.82% (85 runs sampled)
+(esm) parseTime("1s").years x 327,453 ops/sec ±0.95% (89 runs sampled)
+(esm) parseTime("1s")._deparsed x 180,199 ops/sec ±0.97% (94 runs sampled)
+(esm) parseTime("1y2mth3w4d5h6s7ms") x 114,544 ops/sec ±0.50% (94 runs sampled)
+(esm) parseTime("1y2mth3w4d5h6s7ms").ms x 112,932 ops/sec ±0.55% (94 runs sampled)
+(esm) parseTime("1y2mth3w4d5h6s7ms").years x 109,972 ops/sec ±0.48% (89 runs sampled)
+(esm) parseTime("1y2mth3w4d5h6s7ms")._deparsed x 85,896 ops/sec ±0.64% (94 runs sampled)
 */
