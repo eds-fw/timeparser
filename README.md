@@ -56,3 +56,6 @@ console.log(parsed.seconds); //3_027_600 sec
 (esm) parseTime("1y2mth3w4d5h6s7ms").years x 109,972 ops/sec ±0.48% (89 runs sampled)
 (esm) parseTime("1y2mth3w4d5h6s7ms")._deparsed x 85,896 ops/sec ±0.64% (94 runs sampled)
 ```
+
+# [Source (git)](https://github.com/easy-ds-bot/timeparser)
+# [Issues (git)](https://github.com/easy-ds-bot/timeparser/issues)
