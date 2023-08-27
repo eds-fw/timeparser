@@ -1,6 +1,5 @@
 node_modules/
 dist/
 assets/
-test/
 assets/*.psd
 **/vault.json
