@@ -126,4 +126,5 @@ export function deparseTime(ms: number, separator: string = ''): string
 }
 
 export const timeParser = parseTime;
+export const timeDeparser = deparseTime;
 export default timeParser;
