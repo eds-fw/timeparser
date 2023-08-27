@@ -6,6 +6,6 @@ node_modules/
 test/
 assets/*.psd
 **/vault.json
-tsconfig.json
+tsconfig.*
 
 index.ts
