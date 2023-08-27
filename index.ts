@@ -63,7 +63,7 @@ const entriesRegExp = Object.entries(timeRegExp);
  * 
  * One month = 30 days, one year = 365 days
  * 
- * Returns `null` if `time > 31600 years`
+ * Returns `null` if `time > 31600 years` or if `time == 0 ms`
  */
 export function parseTime(time: string): ParsedTime | null
 {
@@ -86,6 +86,8 @@ export function parseTime(time: string): ParsedTime | null
 
         result += matches_nums * Number(ms);
     }
+
+    if (result == 0) return null;
 
     return {
         get _deparsed()     { return deparseTime(result) },
