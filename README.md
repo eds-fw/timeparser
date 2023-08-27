@@ -10,6 +10,18 @@
 </b>
 <hr>
 
+# API
+- `parseTime(time: string): ParsedTime | null` *as default*
+    > *alias:* `timeParser`
+- `deparseTime(ms: number, separator?: string): string`
+    > *alias:* `timeDeparser`
+- *var* `limitms: number` *as const*
+- *var* `timeRegExp: {[key: number]: RegExp }` *as const*
+- *var* `timeRegExpNames: {[key: string]: RegExp }` *as const*
+- *var* `timeNamesMap: {[key: number]: string }` *as const*
+- *var* `limitsMap: {[key: number]: number }` *as const*
+- *type* `ParsedTime: {...}`
+
 # Requirements
 - [NodeJS](https://nodejs.org/en), recommended `v18` or newer
 # Setup
