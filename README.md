@@ -27,12 +27,12 @@
 # Setup
 1. Install `timeparser` via npm:
 ```bat
-npm i @easy-ds-bot/timeparser
+npm i @eds-fw/timeparser
 ```
 2. Use `timeparser`:
 ```js
 // file.js, type: CommonJS
-const { parseTime } = require("@easy-ds-bot/timeparser");
+const { parseTime } = require("@eds-fw/timeparser");
 let unparsed = "1h5week";
 let parsed = parseTime(unparsed);
 console.log(parsed.ms); //3_027_600_000 ms
@@ -41,7 +41,7 @@ console.log(parsed.seconds); //3_027_600 sec
 or...
 ```js
 // file.js, type: ESM
-import parseTime from "@easy-ds-bot/timeparser";
+import parseTime from "@eds-fw/timeparser";
 let unparsed = "1h5week";
 let parsed = parseTime(unparsed);
 console.log(parsed.ms); //3_027_600_000 ms
@@ -69,5 +69,5 @@ console.log(parsed.seconds); //3_027_600 sec
 (esm) parseTime("1y2mth3w4d5h6s7ms")._deparsed x 73,778 ops/sec ±2.42% (82 runs sampled)
 ```
 
-# [Source (git)](https://github.com/easy-ds-bot/timeparser)
-# [Issues (git)](https://github.com/easy-ds-bot/timeparser/issues)
+# [Source (git)](https://github.com/eds-fw/timeparser)
+# [Issues (git)](https://github.com/eds-fw/timeparser/issues)

@@ -1,5 +1,5 @@
 {
-  "name": "@easy-ds-bot/timeparser",
+  "name": "@eds-fw/timeparser",
   "version": "2.1.1",
   "description": "Simply string time converter (en/ru). From \"5d2h\" to 439200000 ms",
   "main": "index",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/easy-ds-bot/timeparser.git"
+    "url": "git+https://github.com/eds-fw/timeparser.git"
   },
   "keywords": [
     "typescript",
@@ -20,9 +20,9 @@
   "author": "dtkdtk0",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/easy-ds-bot/timeparser/issues"
+    "url": "https://github.com/eds-fw/timeparser/issues"
   },
-  "homepage": "https://github.com/easy-ds-bot/timeparser#readme",
+  "homepage": "https://github.com/eds-fw/timeparser#readme",
   "devDependencies": {
     "@types/node": "^20.5.1",
     "typescript": "^5.1.6"
