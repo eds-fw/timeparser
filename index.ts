@@ -16,24 +16,24 @@ export interface ParsedTime
 /** 316 centuries or 31600 years */
 export const limitms = 999_999_999_999_999;
 export const timeRegExp = {
-                 1: /([0-9])+(ms|msec(|s)|milli|millisecond(|s)|мс|мсек|миллисекунд(|а|ы))/gi,
-             1_000: /([0-9])+(s|sec(|s)|second(|s)|с|сек|секунд(|а|ы))/gi,
-            60_000: /([0-9])+(m|min(|s)|minute(|s)|м|мин|минут(|а|ы))/gi,
-         3_600_000: /([0-9])+(h|hr(|s)|hour(|s)|ч|чс|час(|а|ов))/gi,
-        86_400_000: /([0-9])+(d|day(|s)|д|день|дн(|и|ей))/gi,
-       604_800_000: /([0-9])+(w|wk(|s)|week(|s)|н|нд|нед|недел(ь|и|ей))/gi,
-     2_592_000_000: /([0-9])+(mth(|s)|mnth(|s)|month(|s)|мес|месяц(|ы|ев))/gi,
-    22_118_400_000: /([0-9])+(y|yr(|s)|year(|s)|г|гд|год(|ы|ов)|лет)/gi,
+                 1: /(\d)+(ms|msec(|s)|milli|millisecond(|s)|мс|мсек|миллисекунд(|а|ы))/gi,
+             1_000: /(\d)+(s|sec(|s)|second(|s)|с|сек|секунд(|а|ы))/gi,
+            60_000: /(\d)+(m|min(|s)|minute(|s)|м|мин|минут(|а|ы))/gi,
+         3_600_000: /(\d)+(h|hr(|s)|hour(|s)|ч|чс|час(|а|ов))/gi,
+        86_400_000: /(\d)+(d|day(|s)|д|день|дн(|и|ей))/gi,
+       604_800_000: /(\d)+(w|wk(|s)|week(|s)|н|нд|нед|недел(ь|и|ей))/gi,
+     2_592_000_000: /(\d)+(mth(|s)|mnth(|s)|month(|s)|мес|месяц(|ы|ев))/gi,
+    22_118_400_000: /(\d)+(y|yr(|s)|year(|s)|г|гд|год(|ы|ов)|лет)/gi,
 };
 export const timeRegExpNames = {
-    "ms":           /([0-9])+(ms|msec(|s)|milli|millisecond(|s)|мс|мсек|миллисекунд(|а|ы))/gi,
-    "s":            /([0-9])+(s|sec(|s)|second(|s)|с|сек|секунд(|а|ы))/gi,
-    "m":            /([0-9])+(m|min(|s)|minute(|s)|м|мин|минут(|а|ы))/gi,
-    "h":            /([0-9])+(h|hr(|s)|hour(|s)|ч|чс|час(|а|ов))/gi,
-    "d":            /([0-9])+(d|day(|s)|д|день|дн(|и|ей))/gi,
-    "w":            /([0-9])+(w|wk(|s)|week(|s)|н|нд|нед|недел(ь|и|ей))/gi,
-    "mon":          /([0-9])+(mon|mth(|s)|mnth(|s)|month(|s)|мес|месяц(|ы|ев))/gi,
-    "y":            /([0-9])+(y|yr(|s)|year(|s)|г|гд|год(|ы|ов)|лет)/gi,
+    "ms":           /(\d)+(ms|msec(|s)|milli|millisecond(|s)|мс|мсек|миллисекунд(|а|ы))/gi,
+    "s":            /(\d)+(s|sec(|s)|second(|s)|с|сек|секунд(|а|ы))/gi,
+    "m":            /(\d)+(m|min(|s)|minute(|s)|м|мин|минут(|а|ы))/gi,
+    "h":            /(\d)+(h|hr(|s)|hour(|s)|ч|чс|час(|а|ов))/gi,
+    "d":            /(\d)+(d|day(|s)|д|день|дн(|и|ей))/gi,
+    "w":            /(\d)+(w|wk(|s)|week(|s)|н|нд|нед|недел(ь|и|ей))/gi,
+    "mon":          /(\d)+(mon|mth(|s)|mnth(|s)|month(|s)|мес|месяц(|ы|ев))/gi,
+    "y":            /(\d)+(y|yr(|s)|year(|s)|г|гд|год(|ы|ов)|лет)/gi,
 };
 export const timeNamesMap = {
                  1: "ms",
@@ -80,7 +80,7 @@ export function parseTime(time: string): ParsedTime | null
 
         result_matches = result_matches.concat(...(matches as string[]));
 
-        let matches_nums = matches.map($ => Number($.match(/([0-9])/g)?.join('') ?? 0)).reduce((a, b) => a + b);
+        let matches_nums = matches.map($ => Number($.match(/(\d)/g)?.join('') ?? 0)).reduce((a, b) => a + b);
         if (matches_nums > limitsMap[Number(ms) as keyof typeof limitsMap])
         return null;
 
