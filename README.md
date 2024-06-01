@@ -11,15 +11,15 @@
 <hr>
 
 # API
-- `parseTime(time: string): ParsedTime | null` *as default*
+- `parseTime (time: string): ParsedTime | null` *as default*
     > *alias:* `timeParser`
-- `deparseTime(ms: number, separator?: string): string`
+- `deparseTime (ms: number, separator?: string): string`
     > *alias:* `timeDeparser`
 - *var* `limitms: number` *as const*
-- *var* `timeRegExp: {[key: number]: RegExp }` *as const*
-- *var* `timeRegExpNames: {[key: string]: RegExp }` *as const*
-- *var* `timeNamesMap: {[key: number]: string }` *as const*
-- *var* `limitsMap: {[key: number]: number }` *as const*
+- *var* `timeRegExp: Record<number, RegExp>` *as const*
+- *var* `timeRegExpNames: Record<string, RegExp>` *as const*
+- *var* `timeNamesMap: Record<number, string>` *as const*
+- *var* `limitsMap: Record<number, number>` *as const*
 - *type* `ParsedTime: {...}`
 
 # Requirements
