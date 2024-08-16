@@ -1,3 +1,6 @@
+# DEPRECATED
+Use [`ms`](https://www.npmjs.com/package/ms) instead
+
 <p align="center">
     <img src="https://avatars.githubusercontent.com/u/142582396?s=400&u=081f3176405a243f5090002723556c3e723089e3&v=4" width="200"/>
 </p>
@@ -70,4 +73,3 @@ console.log(parsed.seconds); //3_027_600 sec
 ```
 
 # [Source (git)](https://github.com/eds-fw/timeparser)
-# [Issues (git)](https://github.com/eds-fw/timeparser/issues)
